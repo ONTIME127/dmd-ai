@@ -1,0 +1,1420 @@
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns:
+    minmax(420px, 0.9fr)
+    minmax(520px, 1.1fr);
+
+  background: #ffffff;
+}
+
+/* ================================
+   LEFT BRAND AREA
+================================ */
+
+.auth-brand-side {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 38px 55px 60px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(151, 101, 255, 0.34),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(91, 121, 232, 0.24),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #17132f 0%,
+      #2e1758 55%,
+      #17142f 100%
+    );
+}
+
+.auth-brand-side::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -170px;
+  top: 100px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-brand-side::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: -100px;
+  bottom: -100px;
+
+  border-radius: 50%;
+
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.auth-back-button {
+  position: relative;
+  z-index: 5;
+
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  border: none;
+
+  color: rgba(255, 255, 255, 0.82);
+  background: transparent;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.auth-brand-content {
+  position: relative;
+  z-index: 4;
+
+  width: 100%;
+  max-width: 590px;
+
+  margin: auto 0;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 45px;
+}
+
+.auth-logo-icon {
+  width: 55px;
+  height: 55px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 16px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8a5bf2,
+      #6333c9
+    );
+
+  box-shadow:
+    0 14px 32px rgba(109, 63, 218, 0.3);
+}
+
+.auth-logo > div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.auth-logo strong {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.auth-logo span {
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auth-brand-content h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(45px, 4.2vw, 66px);
+  line-height: 1.05;
+
+  letter-spacing: -2.5px;
+
+  font-weight: 800;
+}
+
+.auth-brand-content h1 span {
+  color: #c9aaff;
+}
+
+.auth-brand-content > p {
+  max-width: 570px;
+
+  margin-top: 25px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* ================================
+   BENEFITS
+================================ */
+
+.auth-benefit-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 34px;
+}
+
+.auth-benefit-list > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  gap: 13px;
+
+  max-width: 530px;
+
+  padding: 15px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.auth-benefit-list svg {
+  color: #c7a7ff;
+}
+
+.auth-benefit-list span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.auth-benefit-list strong {
+  color: #ffffff;
+
+  font-size: 15px;
+}
+
+.auth-benefit-list small {
+  color: rgba(255, 255, 255, 0.64);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ================================
+   RIGHT FORM AREA
+================================ */
+
+.auth-form-side {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 55px 45px;
+
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(124, 78, 220, 0.07),
+      transparent 30%
+    ),
+    #ffffff;
+}
+
+.auth-form-card {
+  width: min(100%, 590px);
+}
+
+/* HEADER */
+
+.auth-form-header > span {
+  color: #6938d3;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.auth-form-header h2 {
+  margin: 8px 0 0;
+
+  color: #151b33;
+
+  font-size: 38px;
+  line-height: 1.2;
+
+  letter-spacing: -1px;
+}
+
+.auth-form-header p {
+  margin: 10px 0 0;
+
+  color: #687185;
+
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ================================
+   ROLE SELECTOR
+================================ */
+
+.auth-role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.auth-role {
+  min-height: 92px;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid #ded8e9;
+
+  border-radius: 15px;
+
+  color: #474f63;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.auth-role:hover {
+  transform: translateY(-2px);
+
+  border-color: #bba9e7;
+}
+
+.auth-role.active {
+  color: #5e30c7;
+
+  border-color: #7545dc;
+
+  background: #f5f0ff;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(111, 61, 211, 0.08);
+}
+
+.auth-role svg {
+  color: #6938d3;
+}
+
+.auth-role span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.auth-role strong {
+  color: #1c233c;
+
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.auth-role small {
+  color: #727b8e;
+
+  font-size: 13px;
+}
+
+/* PROFESSIONAL NOTICE */
+
+.auth-professional-notice {
+  margin-top: 16px;
+
+  padding: 14px 16px;
+
+  border-left: 3px solid #7243d9;
+
+  border-radius: 0 10px 10px 0;
+
+  color: #5e687c;
+
+  background: #faf8ff;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ================================
+   FORM
+================================ */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 19px;
+
+  margin-top: 27px;
+}
+
+.auth-form > label {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  color: #343b54;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.auth-input-wrap {
+  min-height: 55px;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 0 15px;
+
+  border: 1px solid #dcd6e7;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-input-wrap:focus-within {
+  border-color: #7442df;
+
+  box-shadow:
+    0 0 0 4px rgba(116, 66, 223, 0.08);
+}
+
+.auth-input-wrap > svg {
+  color: #7551b9;
+}
+
+.auth-input-wrap input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  color: #232a43;
+  background: transparent;
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.auth-input-wrap input::placeholder {
+  color: #979baa;
+}
+
+.auth-password-toggle {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border: none;
+
+  color: #777f90;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+/* OPTIONS */
+
+.auth-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.auth-checkbox {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+
+  gap: 8px !important;
+
+  color: #626b7e !important;
+
+  font-size: 14px !important;
+
+  cursor: pointer;
+}
+
+.auth-checkbox input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #6838d3;
+}
+
+.auth-terms {
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.auth-text-button {
+  border: none;
+
+  color: #6738d2;
+  background: transparent;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* ERROR */
+
+.auth-error {
+  padding: 13px 15px;
+
+  border: 1px solid #f1b8b8;
+  border-radius: 10px;
+
+  color: #9f2525;
+  background: #fff5f5;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* SUBMIT */
+
+.auth-submit-button {
+  min-height: 54px;
+
+  border: none;
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7845df,
+      #5525ba
+    );
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 14px 29px rgba(98, 52, 203, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-submit-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 34px rgba(98, 52, 203, 0.28);
+}
+
+/* SWITCH */
+
+.auth-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 23px;
+
+  color: #697286;
+
+  font-size: 14px;
+}
+
+.auth-switch button {
+  border: none;
+
+  color: #6738d2;
+  background: transparent;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 980px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand-side {
+    min-height: auto;
+
+    padding: 35px 40px 55px;
+  }
+
+  .auth-brand-content {
+    margin-top: 65px;
+  }
+
+  .auth-benefit-list {
+    display: none;
+  }
+
+  .auth-form-side {
+    min-height: auto;
+
+    padding: 60px 35px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  .auth-brand-side {
+    padding:
+      27px 20px
+      45px;
+  }
+
+  .auth-brand-content {
+    margin-top: 45px;
+  }
+
+  .auth-logo {
+    margin-bottom: 30px;
+  }
+
+  .auth-brand-content h1 {
+    font-size: 42px;
+  }
+
+  .auth-brand-content > p {
+    font-size: 16px;
+  }
+
+  .auth-form-side {
+    padding: 45px 18px;
+  }
+
+  .auth-form-header h2 {
+    font-size: 32px;
+  }
+
+  .auth-role-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-role {
+    min-height: 80px;
+  }
+
+  .auth-form-options {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ======================================================
+   HOSPITAL / CLINICAL ORGANIZATION REGISTRATION
+====================================================== */
+
+.hospital-signup-page {
+  grid-template-columns:
+    minmax(390px, 0.72fr)
+    minmax(680px, 1.28fr);
+}
+
+.hospital-signup-page .auth-form-side {
+  align-items: flex-start;
+  padding-top: 65px;
+  padding-bottom: 80px;
+}
+
+.hospital-form-card {
+  width: min(100%, 820px);
+}
+
+.hospital-registration-form {
+  gap: 24px;
+}
+
+.hospital-verification-banner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  border: 1px solid #d7caef;
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3edff,
+      #faf8ff
+    );
+}
+
+.hospital-verification-banner > div {
+  width: 47px;
+  height: 47px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7946e1,
+      #5827bd
+    );
+}
+
+.hospital-verification-banner > span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.hospital-verification-banner strong {
+  color: #281750;
+
+  font-size: 16px;
+}
+
+.hospital-verification-banner p {
+  margin: 0;
+
+  color: #606a7e;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* FORM SECTION */
+
+.hospital-form-section {
+  padding: 25px;
+
+  border: 1px solid #e5dfef;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 30px
+    rgba(51, 39, 83, 0.05);
+}
+
+.hospital-section-heading {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  gap: 13px;
+
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid #eee9f4;
+}
+
+.hospital-section-heading > svg {
+  margin-top: 3px;
+
+  color: #6938d3;
+}
+
+.hospital-section-heading > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.hospital-section-heading span {
+  color: #7141d5;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.hospital-section-heading h3 {
+  margin: 5px 0 0;
+
+  color: #182039;
+
+  font-size: 21px;
+}
+
+.hospital-section-heading p {
+  margin: 6px 0 0;
+
+  color: #697286;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* GRID */
+
+.hospital-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 19px;
+}
+
+.hospital-form-grid > label {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  color: #343b54;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hospital-field-wide {
+  grid-column: 1 / -1;
+}
+
+.hospital-optional {
+  display: inline;
+
+  margin-left: 4px;
+
+  color: #8a90a0;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* SELECT */
+
+.auth-select-wrap {
+  min-height: 55px;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 0 15px;
+
+  border: 1px solid #dcd6e7;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-select-wrap:focus-within {
+  border-color: #7442df;
+
+  box-shadow:
+    0 0 0 4px rgba(116, 66, 223, 0.08);
+}
+
+.auth-select-wrap > svg {
+  color: #7551b9;
+}
+
+.auth-select-wrap select {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  color: #303750;
+  background: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+/* DOCUMENT UPLOAD */
+
+.hospital-upload-box {
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 28px;
+
+  border: 2px dashed #cfc1ea;
+  border-radius: 16px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbf9ff,
+      #f6f2ff
+    );
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hospital-upload-box:hover {
+  transform: translateY(-2px);
+
+  border-color: #8053dd;
+
+  background: #f5efff;
+}
+
+.hospital-upload-box input {
+  display: none;
+}
+
+.hospital-upload-icon {
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 4px;
+
+  border-radius: 15px;
+
+  color: #6938d3;
+
+  background: #eae1ff;
+}
+
+.hospital-upload-box strong {
+  color: #202842;
+
+  font-size: 16px;
+}
+
+.hospital-upload-box span {
+  max-width: 520px;
+
+  color: #687286;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.hospital-upload-box small {
+  color: #8a90a0;
+
+  font-size: 13px;
+}
+
+/* TERMS */
+
+.hospital-terms {
+  padding: 17px;
+
+  border: 1px solid #e5dfef;
+  border-radius: 13px;
+
+  background: #faf8ff;
+}
+
+.hospital-terms span {
+  color: #596378;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* SUBMIT */
+
+.hospital-submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+}
+
+.hospital-submit-note {
+  margin: -10px 0 0;
+
+  color: #727b8e;
+
+  font-size: 13px;
+  line-height: 1.55;
+
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .hospital-signup-page {
+    grid-template-columns: 1fr;
+  }
+
+  .hospital-signup-page .auth-brand-side {
+    min-height: auto;
+  }
+
+  .hospital-signup-page .auth-form-side {
+    padding-top: 55px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hospital-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hospital-field-wide {
+    grid-column: auto;
+  }
+
+  .hospital-form-section {
+    padding: 19px;
+  }
+
+  .hospital-section-heading h3 {
+    font-size: 19px;
+  }
+}
+
+/* ==========================================
+   REAL BACKEND SUCCESS STATES
+========================================== */
+
+.auth-success {
+  padding: 15px 17px;
+
+  border: 1px solid #b9dfc8;
+  border-radius: 11px;
+
+  color: #17623a;
+  background: #f1fbf5;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.auth-submit-button:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================================
+   HOSPITAL APPLICATION PAGE
+========================================== */
+
+.hospital-application-page {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(118, 69, 222, 0.08),
+      transparent 28%
+    ),
+    #f8f7fc;
+
+  color: #171e37;
+}
+
+.hospital-application-header {
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 0 38px;
+
+  border-bottom: 1px solid #e8e3f1;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.hospital-application-header button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  border: none;
+
+  color: #433364;
+  background: transparent;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.hospital-application-header > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #6738d2;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.hospital-application-container {
+  width: min(
+    900px,
+    calc(100% - 40px)
+  );
+
+  margin: 0 auto;
+
+  padding: 65px 0 90px;
+}
+
+.hospital-application-heading {
+  max-width: 760px;
+
+  margin-bottom: 32px;
+}
+
+.hospital-application-heading > span {
+  color: #6938d3;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.hospital-application-heading h1 {
+  margin: 9px 0 0;
+
+  color: #151c34;
+
+  font-size: clamp(
+    38px,
+    5vw,
+    56px
+  );
+
+  line-height: 1.08;
+
+  letter-spacing: -1.8px;
+}
+
+.hospital-application-heading p {
+  max-width: 700px;
+
+  margin: 16px 0 0;
+
+  color: #606a7e;
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.hospital-application-loading {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  background: #faf9ff;
+}
+
+.hospital-application-loading > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  color: #5f34c3;
+
+  font-size: 16px;
+}
+
+/* mobile */
+
+@media (max-width: 600px) {
+  .hospital-application-header {
+    padding: 0 18px;
+  }
+
+  .hospital-application-header > div {
+    display: none;
+  }
+
+  .hospital-application-container {
+    width: calc(100% - 26px);
+
+    padding-top: 45px;
+  }
+
+  .hospital-application-heading p {
+    font-size: 15px;
+  }
+}
+/* =====================================================
+   AUTH SPLIT-SCREEN SCROLL BEHAVIOR
+   Desktop: left brand panel is stationary; form side scrolls.
+===================================================== */
+@media (min-width: 981px) {
+  .auth-page {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .auth-brand-side {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    align-self: start;
+  }
+
+  .auth-form-side {
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+}
+
+/* =====================================================
+   AUTH — POLISHED SPLIT SCREEN
+   Stationary brand panel; only form column scrolls.
+===================================================== */
+@media (min-width: 981px) {
+  .auth-page{grid-template-columns:minmax(430px,44vw) minmax(520px,56vw);height:100vh;overflow:hidden;background:#fff}
+  .auth-brand-side{height:100vh;min-height:0;padding:30px clamp(34px,4vw,64px);overflow:hidden;justify-content:flex-start}
+  .auth-brand-content{max-width:560px;margin:auto 0;transform:none}
+  .auth-logo{margin-bottom:30px}
+  .auth-brand-content h1{font-size:clamp(42px,4vw,60px);line-height:1.02}
+  .auth-brand-content>p{font-size:16px;line-height:1.65;margin-top:20px}
+  .auth-benefit-list{margin-top:24px;gap:10px}
+  .auth-benefit-list>div{padding:12px 14px}
+  .auth-form-side{height:100vh;min-height:0;overflow-y:auto;display:block;padding:46px clamp(34px,5vw,74px) 70px;background:linear-gradient(180deg,#fbfaff 0%,#fff 28%)}
+  .auth-form-card{width:min(100%,620px);margin:0 auto;min-height:calc(100vh - 116px);display:flex;flex-direction:column;justify-content:center}
+}
+.auth-form-card{padding:4px 0}.auth-form-header h2{font-size:clamp(34px,3vw,42px)}
+.auth-input-wrap,.auth-select-wrap{min-height:52px}.auth-form label{font-size:14px}.auth-input-wrap input,.auth-select-wrap select{font-size:15px}
+
+/* =====================================================
+   HOSPITAL VERIFICATION WIZARD
+===================================================== */
+.hospital-wizard-container{width:min(980px,calc(100% - 40px))}.hospital-wizard-progress{margin:0 0 26px;padding:22px 24px;border:1px solid #e4e0ed;border-radius:18px;background:#fff;box-shadow:0 14px 36px rgba(35,29,67,.05)}
+.hospital-progress-top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:13px}.hospital-progress-top strong{font-size:15px;color:#2a3148}.hospital-progress-top span{font-size:15px;color:#6938d3;font-weight:800;text-transform:capitalize}.hospital-progress-track{height:7px;border-radius:999px;background:#eeeaf5;overflow:hidden}.hospital-progress-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7543dd,#9b72ef);transition:width .25s ease}.hospital-step-dots{display:flex;justify-content:space-between;margin-top:14px}.hospital-step-dots button{width:34px;height:34px;border-radius:50%;border:1px solid #ddd7e8;background:#fff;color:#7b8294;font-weight:800;display:grid;place-items:center;cursor:default}.hospital-step-dots button.active{border-color:#6938d3;background:#6938d3;color:#fff;box-shadow:0 7px 18px rgba(105,56,211,.2)}.hospital-step-dots button.complete{border-color:#cbbbea;background:#f2edff;color:#6938d3;cursor:pointer}
+.hospital-wizard-card{margin:0;box-shadow:0 18px 50px rgba(35,29,67,.06)}.hospital-wizard-card .hospital-form-grid label{font-size:15px}.field-optional{font-size:12px;color:#8a90a0;font-weight:600;margin-left:5px}.hospital-message{margin:0 0 20px}
+.hospital-document-grid{display:grid;gap:14px}.hospital-doc-upload{position:relative;display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:center;padding:19px;border:1px solid #ded9e8;border-radius:15px;background:#fff;cursor:pointer;transition:.2s}.hospital-doc-upload:hover{border-color:#a98be8;background:#fcfaff}.hospital-doc-upload.has-file{border-color:#b8d9c5;background:#f7fcf9}.hospital-doc-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}.hospital-doc-icon{width:50px;height:50px;border-radius:14px;background:#eee7ff;color:#6938d3;display:grid;place-items:center}.hospital-doc-upload.has-file .hospital-doc-icon{background:#e7f6ed;color:#217047}.hospital-doc-upload>div:last-child{min-width:0}.hospital-doc-upload strong{display:flex;align-items:center;gap:9px;color:#202842;font-size:16px}.hospital-doc-upload strong em{font-style:normal;font-size:11px;padding:4px 7px;border-radius:999px;background:#f1ebff;color:#6938d3}.hospital-doc-upload p{margin:5px 0;color:#687286;font-size:14px;line-height:1.55}.hospital-doc-upload small{font-size:13px;color:#8a90a0}.hospital-security-note{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-top:18px;padding:16px;border-radius:14px;background:#f4f0ff;color:#6335c8}.hospital-security-note strong{font-size:15px}.hospital-security-note p{margin:4px 0 0;font-size:14px;line-height:1.55;color:#646d80}
+.hospital-review-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.hospital-review-block{padding:20px;border:1px solid #e4e1eb;border-radius:15px;background:#fbfbfe}.hospital-review-block h4{font-size:18px;margin:0 0 14px;color:#202842}.hospital-review-block>div{padding:10px 0;border-top:1px solid #eceaf1;display:grid;gap:4px}.hospital-review-block span{font-size:13px;color:#7a8294}.hospital-review-block strong{font-size:15px;color:#2b334a;text-transform:none}.hospital-review-docs{margin-top:16px;padding:18px;border:1px solid #e4e1eb;border-radius:15px}.hospital-review-docs>strong{font-size:16px}.hospital-review-docs>div{display:flex;align-items:center;gap:9px;margin-top:10px;color:#4d586e;font-size:14px}.hospital-review-docs p{font-size:14px;color:#6d7689}.hospital-confirm{display:grid!important;grid-template-columns:auto 1fr!important;gap:11px!important;align-items:start!important;margin-top:18px;padding:17px;border:1px solid #d9d2e7;border-radius:14px;background:#faf8ff}.hospital-confirm input{margin-top:3px;width:18px;height:18px}.hospital-confirm span{font-size:14px;line-height:1.6;color:#566076}.hospital-wizard-actions{display:flex;justify-content:space-between;gap:14px;margin-top:20px}.hospital-secondary-button,.hospital-next-button{min-height:52px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;font:800 15px inherit}.hospital-secondary-button{border:1px solid #d8d3e2;background:#fff;color:#3d465d;cursor:pointer}.hospital-next-button{width:auto;min-width:190px}.hospital-more-info{margin-bottom:20px;padding:18px 20px;border:1px solid #efd8a8;border-radius:15px;background:#fffaf0}.hospital-more-info strong{font-size:16px;color:#7a5714}.hospital-more-info p{margin:6px 0 0;font-size:14px;line-height:1.6;color:#6e6250}
+.hospital-status-container{display:grid;place-items:center;min-height:calc(100vh - 76px);padding-top:45px}.hospital-status-card{width:min(680px,100%);padding:42px;border:1px solid #e3dfeb;border-radius:22px;background:#fff;text-align:center;box-shadow:0 24px 70px rgba(35,29,67,.09)}.hospital-status-icon{width:70px;height:70px;margin:0 auto 18px;border-radius:20px;background:#eee7ff;color:#6938d3;display:grid;place-items:center}.hospital-status-card>span{font-size:12px;letter-spacing:.9px;font-weight:900;color:#7145d6}.hospital-status-card h1{font-size:34px;margin:9px 0 14px}.hospital-status-pill{width:fit-content;margin:0 auto 18px;padding:8px 13px;border-radius:999px;background:#fff3d9;color:#805b13;font-size:13px;font-weight:900;text-transform:capitalize}.status-approved{background:#eaf8ef;color:#236a42}.status-rejected{background:#fff0f0;color:#a33b3b}.hospital-status-card>p{max-width:560px;margin:0 auto 22px;color:#667084;font-size:15px;line-height:1.7}.hospital-review-note{text-align:left;margin:0 0 22px;padding:16px;border-radius:13px;background:#faf8ff;border:1px solid #e5dff0}.hospital-review-note strong{font-size:15px}.hospital-review-note p{margin:5px 0 0;font-size:14px;line-height:1.6;color:#616b7f}.hospital-status-card .auth-submit-button{width:auto;min-width:190px}
+@media(max-width:700px){.hospital-review-grid{grid-template-columns:1fr}.hospital-wizard-container{width:calc(100% - 24px)}.hospital-wizard-progress{padding:18px}.hospital-progress-top{align-items:flex-start;flex-direction:column;gap:4px}.hospital-wizard-actions{align-items:stretch;flex-direction:column-reverse}.hospital-wizard-actions>span{display:none}.hospital-secondary-button,.hospital-next-button{width:100%}.hospital-status-card{padding:28px 20px}.hospital-status-card h1{font-size:28px}}
+
+/* Google authentication */
+.auth-google-button{width:100%;min-height:54px;margin-top:24px;border:1.5px solid #d9dce6;border-radius:14px;background:#fff;color:#1d2438;display:flex;align-items:center;justify-content:center;gap:12px;font-size:16px;font-weight:800;cursor:pointer;transition:.2s ease;box-shadow:0 5px 16px rgba(30,35,55,.04)}
+.auth-google-button:hover{border-color:#b9aed6;background:#fbfaff;transform:translateY(-1px)}
+.auth-google-button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.google-g{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-size:18px;font-weight:900;color:#4285f4;background:#fff;border:1px solid #e1e4ea}
+.auth-divider{display:flex;align-items:center;gap:14px;margin:20px 0;color:#7a8294;font-size:14px;font-weight:700}
+.auth-divider::before,.auth-divider::after{content:"";height:1px;background:#e4e6ed;flex:1}
+.auth-divider span{white-space:nowrap}
+.oauth-callback-page{min-height:100vh;display:grid;place-items:center;padding:30px;background:linear-gradient(145deg,#f8f6ff,#fff)}
+.oauth-callback-card{width:min(480px,100%);padding:42px;border:1px solid #e3dff0;border-radius:24px;background:#fff;text-align:center;box-shadow:0 25px 70px rgba(39,27,73,.10)}
+.oauth-callback-card .auth-logo-icon{margin:0 auto 16px}.oauth-callback-card h1{font-size:32px;margin:0 0 10px;color:#171b31}.oauth-callback-card p{font-size:16px;line-height:1.7;color:#667084}.oauth-callback-card .auth-submit-button{margin-top:18px}
+.reset-password-card{text-align:left}.reset-password-card>.auth-logo-icon{margin-left:0}.reset-password-card>h1,.reset-password-card>p{text-align:left}
+
+/* Email confirmation continuation state */
+.auth-success + .auth-submit-button,
+.auth-form .auth-success ~ .auth-submit-button {
+  min-height: 58px;
+}
+
+
+/* ======================================================
+   LOGIN — EXISTING SESSION / ACCOUNT SWITCHING
+====================================================== */
+.auth-current-session{
+  margin-top:24px;
+  padding:18px;
+  border:1px solid #ddd5ee;
+  border-radius:16px;
+  background:linear-gradient(135deg,#faf8ff 0%,#ffffff 78%);
+  box-shadow:0 10px 26px rgba(49,37,82,.055);
+}
+.auth-current-session-copy{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.auth-current-session-copy>span{
+  color:#6d3bd2;
+  font-size:13px;
+  font-weight:850;
+  letter-spacing:.7px;
+}
+.auth-current-session-copy strong{
+  color:#1c233c;
+  font-size:17px;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+.auth-current-session-copy p{
+  margin:2px 0 0;
+  color:#626c81;
+  font-size:15px;
+  line-height:1.65;
+}
+.auth-current-session-actions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+  flex-wrap:wrap;
+}
+.auth-current-session-actions button{
+  min-height:44px;
+  padding:0 15px;
+  border-radius:11px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.auth-session-continue{
+  color:#fff;
+  background:linear-gradient(135deg,#7845df,#5525ba);
+}
+.auth-session-switch{
+  color:#4e3a78;
+  background:#fff;
+  border:1px solid #d9d1e8!important;
+}
+.auth-session-switch:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+@media(max-width:600px){
+  .auth-current-session-actions{flex-direction:column}
+  .auth-current-session-actions button{width:100%}
+}

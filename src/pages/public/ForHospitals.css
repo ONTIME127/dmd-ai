@@ -1,0 +1,395 @@
+.hospital-public{
+  min-height:100vh;
+  background:#f6f8fc;
+  color:#f8fbff;
+}
+.hospital-public *{box-sizing:border-box}
+
+.hospital-hero{
+  position:relative;
+  min-height:610px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 50%,rgba(16,103,203,.20),transparent 36%),
+    linear-gradient(100deg,#06122d 0%,#071733 45%,#0a2043 72%,#07152f 100%);
+}
+.hospital-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,15,39,.98) 0%,rgba(5,15,39,.96) 35%,rgba(5,15,39,.60) 53%,rgba(5,15,39,.06) 72%,transparent 100%),
+    radial-gradient(circle at 92% 20%,rgba(42,137,255,.16),transparent 27%);
+}
+
+.hospital-hero-shell{
+  position:relative;
+  z-index:2;
+  width:min(1440px,calc(100% - 56px));
+  min-height:610px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(520px,.87fr) minmax(620px,1.13fr);
+  align-items:stretch;
+}
+
+.hospital-copy{
+  position:relative;
+  z-index:6;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:46px 36px 28px 0;
+  max-width:665px;
+}
+.hospital-kicker{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 15px;
+  border-radius:9px;
+  border:1px solid rgba(108,131,235,.42);
+  background:rgba(10,21,53,.66);
+  color:#e6ebff;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:inset 0 0 18px rgba(47,72,178,.08);
+}
+.hospital-kicker svg{width:18px;height:18px;color:#b9c7ff}
+
+.hospital-copy h1{
+  margin:22px 0 0;
+  color:#fff;
+  font-size:clamp(48px,4.8vw,72px);
+  line-height:.99;
+  letter-spacing:-3px;
+  font-weight:900;
+}
+.hospital-copy h1 span{
+  color:#6687ff;
+  background:linear-gradient(90deg,#718eff,#8a72ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hospital-lead{
+  max-width:650px;
+  margin:26px 0 0;
+  color:#c6cede;
+  font-size:16px;
+  line-height:1.75;
+}
+
+.hospital-actions{
+  display:flex;
+  gap:18px;
+  margin-top:30px;
+}
+.hospital-actions button{
+  min-height:52px;
+  border-radius:9px;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-size:14px;
+  font-weight:850;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.hospital-actions button:hover{transform:translateY(-2px)}
+.hospital-actions svg{width:17px;height:17px}
+.hospital-actions .primary{
+  border:0;
+  color:#fff;
+  background:linear-gradient(90deg,#4338ff,#7a32f5);
+  box-shadow:0 12px 28px rgba(80,46,255,.28);
+}
+.hospital-actions .secondary{
+  border:1px solid rgba(129,150,222,.46);
+  color:#eef3ff;
+  background:rgba(8,20,49,.66);
+}
+
+.hospital-trust{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  margin-top:44px;
+  border-top:1px solid rgba(167,184,235,.13);
+  padding-top:18px;
+}
+.hospital-trust article{
+  min-width:0;
+  display:grid;
+  grid-template-columns:26px 1fr;
+  column-gap:10px;
+  padding:0 18px;
+  border-right:1px solid rgba(167,184,235,.14);
+}
+.hospital-trust article:first-child{padding-left:0}
+.hospital-trust article:last-child{border-right:0}
+.hospital-trust svg{
+  width:18px;
+  height:18px;
+  color:#d2dcff;
+  margin-top:1px;
+}
+.hospital-trust strong{
+  display:block;
+  color:#f2f5ff;
+  font-size:11px;
+  line-height:1.2;
+}
+.hospital-trust span{
+  display:block;
+  margin-top:5px;
+  color:#aeb9cf;
+  font-size:10px;
+  line-height:1.28;
+}
+
+.hospital-visual{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  width:58%;
+  overflow:hidden;
+}
+.hospital-visual::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0;
+  background:linear-gradient(90deg,#071733 0%,rgba(7,23,51,.64) 13%,rgba(7,23,51,.12) 29%,transparent 48%);
+  pointer-events:none;
+}
+.hospital-visual img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:52% center;
+  filter:saturate(.95) contrast(1.06) brightness(.92);
+}
+
+
+.hospital-solutions{
+  padding:72px 24px 90px;
+  background:#f7f9fd;
+  color:#14203d;
+}
+.hospital-section-heading{
+  max-width:820px;
+  margin:0 auto;
+  text-align:center;
+}
+.hospital-section-heading>span{
+  color:#6248dc;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.hospital-section-heading h2{
+  margin:10px 0 0;
+  font-size:38px;
+  letter-spacing:-1.1px;
+}
+.hospital-section-heading p{
+  margin:13px auto 0;
+  color:#66738b;
+  line-height:1.65;
+}
+.hospital-solution-grid{
+  width:min(1200px,100%);
+  margin:36px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.hospital-solution-grid article{
+  padding:25px;
+  border:1px solid #e0e6f0;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 14px 32px rgba(38,52,89,.07);
+}
+.hospital-solution-grid article>svg{
+  width:28px;
+  height:28px;
+  color:#5b43dd;
+}
+.hospital-solution-grid h3{
+  margin:18px 0 0;
+  font-size:18px;
+}
+.hospital-solution-grid p{
+  margin:10px 0 0;
+  color:#657187;
+  line-height:1.6;
+  font-size:14px;
+}
+
+@media(max-width:1120px){
+  .hospital-hero-shell{grid-template-columns:1fr}
+  .hospital-copy{max-width:650px;padding-right:0}
+  .hospital-visual{opacity:.35;width:100%}
+  .hospital-copy{z-index:8}
+  .metric{display:none}
+}
+@media(max-width:760px){
+  .hospital-hero{min-height:auto}
+  .hospital-hero-shell{width:calc(100% - 32px);min-height:auto}
+  .hospital-copy{padding:34px 0 38px}
+  .hospital-copy h1{font-size:48px}
+  .hospital-lead{font-size:14px}
+  .hospital-actions{flex-direction:column}
+  .hospital-actions button{width:100%}
+  .hospital-trust{grid-template-columns:1fr 1fr;gap:18px 0}
+  .hospital-trust article:nth-child(2){border-right:0}
+  .hospital-solution-grid{grid-template-columns:1fr}
+}
+
+
+/* ============================================================
+   HOSPITAL HERO CLEAN SINGLE-VISUAL FIX
+   Use the original right-side visual only. No duplicate metrics.
+============================================================ */
+.hospital-hero{
+  min-height:500px !important;
+}
+
+.hospital-hero-shell{
+  width:min(1400px,calc(100% - 48px)) !important;
+  min-height:500px !important;
+  grid-template-columns:minmax(500px,.88fr) minmax(620px,1.12fr) !important;
+}
+
+.hospital-copy{
+  max-width:620px !important;
+  padding:32px 28px 24px 0 !important;
+}
+
+.hospital-copy h1{
+  margin-top:18px !important;
+  font-size:clamp(44px,4.15vw,64px) !important;
+  line-height:1 !important;
+  letter-spacing:-2.5px !important;
+}
+
+.hospital-lead{
+  margin-top:22px !important;
+  max-width:600px !important;
+  font-size:14px !important;
+  line-height:1.68 !important;
+}
+
+.hospital-actions{
+  margin-top:24px !important;
+}
+
+.hospital-actions button{
+  min-height:48px !important;
+  padding:0 20px !important;
+  font-size:13px !important;
+}
+
+.hospital-trust{
+  margin-top:32px !important;
+  padding-top:16px !important;
+}
+
+.hospital-trust article{
+  grid-template-columns:22px 1fr !important;
+  column-gap:8px !important;
+  padding:0 14px !important;
+}
+
+.hospital-trust strong{
+  font-size:10.5px !important;
+}
+
+.hospital-trust span{
+  font-size:9.5px !important;
+}
+
+/* Single original visual. No HTML cards layered above it. */
+.hospital-visual{
+  position:absolute !important;
+  top:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  width:58% !important;
+  overflow:hidden !important;
+  background:#071733 !important;
+}
+
+.hospital-visual::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:2 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(
+      90deg,
+      #071733 0%,
+      rgba(7,23,51,.90) 7%,
+      rgba(7,23,51,.48) 16%,
+      rgba(7,23,51,.12) 27%,
+      transparent 42%
+    ) !important;
+}
+
+.hospital-visual img{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:none !important;
+  opacity:1 !important;
+}
+
+/* Explicitly remove every old overlay/card class. */
+.metric,
+.metric-a,
+.metric-b,
+.metric-c,
+.metric-d,
+.sparkline,
+.ring{
+  display:none !important;
+}
+
+@media(max-width:1120px){
+  .hospital-hero-shell{
+    grid-template-columns:1fr !important;
+  }
+  .hospital-visual{
+    width:100% !important;
+    opacity:.28 !important;
+  }
+  .hospital-copy{
+    position:relative !important;
+    z-index:5 !important;
+    max-width:650px !important;
+  }
+}
+
+@media(max-width:760px){
+  .hospital-copy h1{
+    font-size:44px !important;
+  }
+  .hospital-trust{
+    grid-template-columns:1fr 1fr !important;
+  }
+}
