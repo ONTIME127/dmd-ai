@@ -1,0 +1,176 @@
+.hw-anatomy-card{
+  position:relative;
+  width:100%;
+  min-height:570px;
+  overflow:hidden;
+  border:1px solid #e7e1f0;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 56% 35%, rgba(113,64,230,.055), transparent 33%),
+    linear-gradient(180deg,#ffffff 0%,#fdfcff 100%);
+}
+
+.hw-anatomy-stage{
+  position:relative;
+  min-height:520px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+  padding:28px 58px 42px 94px;
+}
+
+.hw-anatomy-toolbar{
+  position:absolute;
+  z-index:20;
+  top:26px;
+  left:22px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid #e7e2ee;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(41,24,78,.10);
+}
+
+.hw-anatomy-tool{
+  position:relative;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-bottom:1px solid #e9e5ef;
+  background:#fff;
+  color:#29235f;
+  cursor:pointer;
+  transition:background .18s ease,color .18s ease,transform .18s ease;
+}
+.hw-anatomy-tool:last-child{border-bottom:0}
+.hw-anatomy-tool:hover{background:#f8f5ff;color:#6428e8}
+.hw-anatomy-tool:active{transform:scale(.96)}
+.hw-anatomy-tool.active,
+.hw-anatomy-tool.selected{
+  background:linear-gradient(180deg,#6f25f7 0%,#5d1ee7 100%);
+  color:#fff;
+}
+.hw-zoom-plus{
+  position:absolute;
+  left:31px;
+  top:14px;
+  width:14px;
+  height:14px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#fff;
+  color:#2a2365;
+  font-size:13px;
+  font-weight:900;
+  line-height:1;
+}
+
+.hw-anatomy-body-wrap{
+  position:relative;
+  z-index:5;
+  width:min(270px,62%);
+  transform-origin:50% 92%;
+  transition:transform .22s ease;
+}
+.hw-anatomy-body{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  user-select:none;
+  pointer-events:none;
+}
+
+.hw-anatomy-platform{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:38px;
+  width:min(310px,67%);
+  height:38px;
+  transform:translateX(-50%);
+  border:2px solid #b995ff;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(151,111,255,.09) 0%,rgba(151,111,255,.025) 62%,transparent 72%);
+  box-shadow:
+    0 9px 23px rgba(118,70,230,.10),
+    inset 0 0 12px rgba(150,110,255,.12);
+}
+
+.hw-anatomy-status{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:54px;
+  border-top:1px solid #f0ecf5;
+  color:#6b2be9;
+  font-size:16px;
+  font-weight:800;
+}
+.hw-anatomy-status svg{opacity:.85}
+
+.hw-anatomy-info{
+  position:absolute;
+  z-index:18;
+  top:28px;
+  right:24px;
+  width:min(230px,47%);
+  padding:16px;
+  border:1px solid #e7def9;
+  border-radius:16px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 12px 34px rgba(49,28,88,.11);
+}
+.hw-anatomy-info strong,
+.hw-anatomy-info span,
+.hw-anatomy-info small{display:block}
+.hw-anatomy-info strong{font-size:16px;color:#2d2541}
+.hw-anatomy-info span{margin-top:5px;color:#6c31d8;font-size:14px;font-weight:700}
+.hw-anatomy-info small{margin-top:8px;color:#777080;font-size:13px;line-height:1.45}
+.hw-anatomy-info button{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:8px;
+  background:#f5f1fb;
+  color:#5f566d;
+  cursor:pointer;
+}
+
+.hw-anatomy-card:fullscreen{
+  width:100vw;
+  height:100vh;
+  border:0;
+  border-radius:0;
+  background:#fff;
+}
+.hw-anatomy-card:fullscreen .hw-anatomy-stage{
+  min-height:calc(100vh - 58px);
+}
+.hw-anatomy-card:fullscreen .hw-anatomy-body-wrap{
+  width:min(390px,46vw);
+}
+.hw-anatomy-card:fullscreen .hw-anatomy-platform{
+  width:min(430px,52vw);
+}
+
+@media(max-width:760px){
+  .hw-anatomy-card{min-height:500px}
+  .hw-anatomy-stage{min-height:450px;padding:24px 30px 38px 76px}
+  .hw-anatomy-toolbar{left:14px;top:18px}
+  .hw-anatomy-tool{width:50px;height:50px}
+  .hw-anatomy-body-wrap{width:min(235px,68%)}
+  .hw-anatomy-platform{width:min(270px,72%);bottom:35px}
+}

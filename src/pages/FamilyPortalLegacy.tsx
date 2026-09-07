@@ -68,9 +68,9 @@ const navItems: Array<{ key: ViewKey; label: string; icon: typeof Home }> = [
   { key: "resources", label: "Resources", icon: BookOpen },
 ];
 
-export default function FamilyPortal() {
+export default function FamilyPortal({ embeddedView }: { embeddedView?: ViewKey } = {}) {
   const navigate = useNavigate();
-  const [activeView, setActiveView] = useState<ViewKey>("overview");
+  const [activeView, setActiveView] = useState<ViewKey>(embeddedView || "overview");
   const [name, setName] = useState("Family");
   const [email, setEmail] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -139,6 +139,7 @@ export default function FamilyPortal() {
   };
 
   useEffect(() => { void load(); }, []);
+  useEffect(() => { if (embeddedView) setActiveView(embeddedView); }, [embeddedView]);
 
   const changeView = (view:ViewKey) => {
     setActiveView(view);
@@ -228,8 +229,8 @@ export default function FamilyPortal() {
   );
 
   return (
-    <main className="portal-shell family-portal-shell">
-      <aside className="portal-sidebar family-side">
+    <main className={`portal-shell family-portal-shell ${embeddedView ? "family-embedded-portal" : ""}`}>
+      {!embeddedView && <aside className="portal-sidebar family-side">
         <button className="portal-brand family-brand" type="button" onClick={() => changeView("overview")}>
           <Heart />
           <span><strong>DMD-AI</strong><small>Family Portal</small></span>
@@ -247,10 +248,10 @@ export default function FamilyPortal() {
           <div><strong>{name}</strong><span>{email}</span></div>
         </div>
         <button className="portal-logout family-signout-button" type="button" onClick={signOut}><span className="family-signout-icon"><LogOut /></span><span className="family-signout-copy"><strong>Sign out</strong><small>Leave Family Portal</small></span></button>
-      </aside>
+      </aside>}
 
       <section className={`portal-main family-main family-workspace-main family-view-${activeView}`}>
-        <header className="family-header family-workspace-header">
+        {!embeddedView && <header className="family-header family-workspace-header">
           <div>
             <span>FAMILY PORTAL</span>
             <h1>{activeView === "overview" ? `Welcome back, ${firstName}` : navItems.find((item) => item.key === activeView)?.label}</h1>
@@ -268,7 +269,7 @@ export default function FamilyPortal() {
             }</p>
           </div>
           {activeView === "overview" && <div className="family-header-actions"><button className="family-secondary-action" type="button" onClick={() => setShowUploadModal(true)} disabled={!patients.length}><Upload /> Upload report</button><button className="family-primary-action" type="button" onClick={() => setShowMemberModal(true)}><Plus /> Add family member</button></div>}
-        </header>
+        </header>}
 
         {msg && <div className="portal-message family-message">{msg}</div>}
 

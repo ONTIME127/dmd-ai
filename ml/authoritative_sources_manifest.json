@@ -1,0 +1,17 @@
+{
+  "training_source": {
+    "accession": "GSE6011",
+    "provider": "NIH / NCBI GEO",
+    "samples_reported_by_GEO": 37,
+    "design": "young DMD quadriceps muscle vs age-matched controls",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE6011"
+  },
+  "external_validation_source": {
+    "accession": "GSE38417",
+    "provider": "NIH / NCBI GEO",
+    "samples_reported_by_GEO": 22,
+    "design": "DMD muscle biopsy vs pathologically normal controls",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE38417"
+  },
+  "note": "NASA/WHO are not used as training sources because these selected NIH/NCBI datasets directly contain DMD molecular measurements and labels."
+}
