@@ -5,6 +5,7 @@ import PublicNavbar from "../../components/public/PublicNavbar";
 import { getPublicLanguage, type LanguageCode } from "../../lib/publicLanguage";
 import { savePendingAssessment } from "../../lib/familyAssessment";
 import { buildAssessmentFeatureVector } from "../../lib/assessmentMlFeatures";
+import { detectAssessmentRoute, type AlternativeContext } from "../../services/dmdAssessmentEngine";
 import "./HomeGuest.css";
 import homeFamilyPeople from "../../assets/public/home-family-people-clean.jpg";
 
@@ -86,7 +87,8 @@ export default function HomeGuest(){
   const [language,setLanguage]=useState<LanguageCode>(getPublicLanguage());
   const [text,setText]=useState("");
   const [showMore,setShowMore]=useState(false);
-  const [stage,setStage]=useState<"prompt"|"confirm"|"questions"|"result"|"limit">("prompt");
+  const [stage,setStage]=useState<"prompt"|"triage"|"confirm"|"questions"|"result"|"limit">("prompt");
+  const [triage,setTriage]=useState<{kind:"urgent"|"acute"|"non-dmd";title:string;summary:string;nextSteps:string[];alternative?:AlternativeContext}|null>(null);
   const [selected,setSelected]=useState<string[]>([]);
   const [age,setAge]=useState("");
   const [duration,setDuration]=useState("");
@@ -128,15 +130,38 @@ export default function HomeGuest(){
       setTimeout(()=>document.getElementById("guest-assessment")?.scrollIntoView({behavior:"smooth",block:"center"}),50);
       return;
     }
-    const lower=text.toLowerCase();
-    const found:string[]=[];
-    if(/fall|trip|stumble/.test(lower)) found.push("falls");
-    if(/stair|step|climb/.test(lower)) found.push("stairs");
-    if(/stand|rise|get up|floor|chair/.test(lower)) found.push("standing");
-    if(/tired|fatigue|exhaust/.test(lower)) found.push("tired");
-    if(/weak|strength|muscle/.test(lower)) found.push("weakness");
-    setSelected(found.length?found:["falls","stairs","standing"]);
-    setStage("confirm");
+    const route=detectAssessmentRoute(text.trim());
+    if(route.route==="urgent-context"){
+      setTriage({
+        kind:"urgent",
+        title:"This description may include an urgent medical problem",
+        summary:"Some of the words entered can be associated with symptoms that should be assessed urgently rather than continuing an online DMD screening.",
+        nextSteps:[...route.urgentReasons.map((reason)=>`Urgent concern detected: ${reason}.`),"Seek urgent medical assessment now. If the person is in immediate danger, use the local emergency service."],
+      });
+      setStage("triage");
+    }else if(route.route==="acute-context"){
+      setTriage({
+        kind:"acute",
+        title:"This sounds more like a recent injury or acute problem than a progressive DMD motor pattern",
+        summary:"The timing and injury context are different from the unexplained, progressive motor difficulties DMD-AI is designed to screen for. This tool cannot determine the exact injury or diagnosis.",
+        nextSteps:["Focus first on appropriate assessment of the injury or acute problem.","Seek urgent care for severe pain, inability to use or bear weight on the injured area, major swelling/deformity, or rapidly worsening symptoms.","If unexplained falls or weakness also happen repeatedly outside the injury, enter those as a separate concern."],
+      });
+      setStage("triage");
+    }else if(route.route==="non-dmd-context"){
+      setTriage({kind:"non-dmd",title:route.alternative.title,summary:route.alternative.summary,nextSteps:route.alternative.nextSteps,alternative:route.alternative});
+      setStage("triage");
+    }else{
+      const detected=route.features.filter((feature)=>feature.weight>0);
+      const found:string[]=[];
+      if(detected.some((feature)=>feature.key==="falls")) found.push("falls");
+      if(detected.some((feature)=>feature.key==="stairs")) found.push("stairs");
+      if(detected.some((feature)=>feature.key==="standing"||feature.key==="gowers")) found.push("standing");
+      if(detected.some((feature)=>feature.key==="fatigue")) found.push("tired");
+      if(detected.some((feature)=>["weakness","run_jump","loss","toe_walking","calf","motor_delay"].includes(feature.key))) found.push("weakness");
+      setSelected([...new Set(found)]);
+      setTriage(null);
+      setStage("confirm");
+    }
     setTimeout(()=>document.getElementById("guest-assessment")?.scrollIntoView({behavior:"smooth",block:"center"}),60);
   };
 
@@ -171,7 +196,7 @@ export default function HomeGuest(){
 
   const resetAssessment=()=>{
     if(guestCount>=GUEST_LIMIT){setStage("limit");return;}
-    setText("");setSelected([]);setAge("");setDuration("");setProgression("");setWalking("");setFamilyHistory("");setLostAbilities([]);setStage("prompt");
+    setText("");setSelected([]);setTriage(null);setAge("");setDuration("");setProgression("");setWalking("");setFamilyHistory("");setLostAbilities([]);setStage("prompt");
     window.scrollTo({top:0,behavior:"smooth"});
   };
 
@@ -265,6 +290,18 @@ export default function HomeGuest(){
     </section>
 
     {stage!=="prompt"&&<section className="guest-assessment-shell" id="guest-assessment">
+      {stage==="triage"&&triage&&<div className="guest-result assessment-v2">
+        <div className="assessment-step">INITIAL GUIDANCE</div>
+        <div className={`result-status ${triage.kind==="urgent"?"urgent":"limited"}`}><Info/><div><span className="result-level">{triage.kind==="urgent"?"URGENT REVIEW":"NOT A STRONG DMD PATTERN"}</span><h3>{triage.title}</h3><p>{triage.summary}</p></div></div>
+        <div className="result-grid">
+          <article><h4>What this means</h4><p>{triage.kind==="urgent"?"DMD-AI is stopping the Duchenne questionnaire because urgent symptoms should be assessed first.":triage.kind==="acute"?"DMD-AI is not treating an isolated recent injury as a Duchenne pattern.":"DMD-AI is not forcing unrelated symptoms into the Duchenne questionnaire."}</p></article>
+          <article><h4>What it does not mean</h4><p>This is not a diagnosis of another disease and it does not prove that DMD is absent. It only determines whether the description is appropriate for this DMD-focused screening flow.</p></article>
+          <article><h4>What to do next</h4><ul>{triage.nextSteps.map((step)=><li key={step}>{step}</li>)}</ul></article>
+          <article><h4>When DMD screening is more relevant</h4><p>Repeated unexplained falls, progressive muscle weakness, difficulty climbing stairs or rising from the floor, delayed motor milestones, toe walking, calf enlargement, or loss of previously acquired motor abilities are examples of changes that should continue to the DMD questions.</p></article>
+        </div>
+        <div className="result-actions"><button className="secondary" onClick={resetAssessment}>Describe a different concern</button>{triage.kind!=="urgent"&&<button className="primary" onClick={()=>{setText("Repeated unexplained falls and progressive muscle weakness.");setSelected(["falls","weakness"]);setTriage(null);setStage("confirm");}}>I also notice progressive motor changes <ArrowRight/></button>}</div>
+      </div>}
+
       {stage==="confirm"&&<div className="guest-confirm">
         <div className="assessment-step">STEP 1 OF 3 · CONFIRM WHAT YOU NOTICED</div>
         <div className="confirm-heading"><span><Check/></span><div><h3>{t.understood}</h3><p>{t.confirm}</p></div></div>

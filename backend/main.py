@@ -453,9 +453,24 @@ async def dmd_molecular_predict(file: UploadFile = File(...)):
     }
 
 def _get_json(url:str):
-    req=urllib.request.Request(url,headers={"User-Agent":"DMD-AI-Research/1.0"})
-    with urllib.request.urlopen(req,timeout=20) as response:
-        return json.loads(response.read().decode("utf-8"))
+    # External research services occasionally return transient 429/5xx responses.
+    # Retry a few times so the deployed Research Portal behaves like the local workspace
+    # instead of dropping a live panel after one temporary network failure.
+    import time as _time
+    last_error=None
+    for attempt in range(3):
+        try:
+            req=urllib.request.Request(url,headers={
+                "User-Agent":"DMD-AI-Research/1.0 (research decision-support workspace)",
+                "Accept":"application/json",
+            })
+            with urllib.request.urlopen(req,timeout=30) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except Exception as exc:
+            last_error=exc
+            if attempt < 2:
+                _time.sleep(0.8*(attempt+1))
+    raise last_error
 
 
 def _text_get(url:str):

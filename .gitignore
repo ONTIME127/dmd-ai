@@ -45,3 +45,4 @@ v14-5-exact-backup/
 dmd-ai-src.zip
 *.zip
 *.bak
+.vercel

@@ -1,0 +1,19 @@
+# Backend is deployed on Render, not Vercel.
+backend/
+ml/data/
+ml/models/
+render.yaml
+render.yaml.temp
+
+# Local-only material and backups
+node_modules/
+dist/
+.git/
+*.zip
+*-backup-*/
+v13-retired-pages/
+v13-backup-files/
+assessment-intelligence-backup/
+home-before-hero-restore-*/
+hospital-current-before-restore-*/
+v14-5-exact-backup/

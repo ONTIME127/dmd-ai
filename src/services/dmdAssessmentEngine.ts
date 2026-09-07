@@ -1,5 +1,14 @@
 export type ConcernLevel = "acute" | "limited" | "review" | "priority" | "urgent";
 
+export type AssessmentRoute = "urgent-context" | "acute-context" | "non-dmd-context" | "dmd-context";
+
+export type AlternativeContext = {
+  category: string;
+  title: string;
+  summary: string;
+  nextSteps: string[];
+};
+
 export type DmdAssessmentInput = {
   narrative: string;
   selectedSymptoms: string[];
@@ -79,6 +88,60 @@ const EMERGENCY_PATTERNS = [
   {label:"Severe chest pain", regex:/\bsevere\b.{0,20}\bchest pain\b/i},
 ];
 
+const NON_DMD_CONTEXTS: Array<{category:string; patterns:RegExp[]; title:string; summary:string; nextSteps:string[]}> = [
+  {
+    category:"respiratory_or_infectious",
+    patterns:[/\b(?:cough|coughing|runny nose|sore throat|fever|flu|cold|sneez|congestion)\w*\b/i],
+    title:"This sounds more like a respiratory or short-term illness concern than a typical DMD motor pattern",
+    summary:"The description is focused on symptoms such as cough, fever, sore throat, congestion, or another short-term illness. Those are not the usual progressive motor features used to screen for DMD.",
+    nextSteps:["Use ordinary medical care for the illness if symptoms are persistent, severe, or worsening.","If there are also repeated unexplained falls, progressive muscle weakness, difficulty climbing stairs or rising from the floor, describe those separately so DMD-AI can assess that motor pattern."],
+  },
+  {
+    category:"digestive",
+    patterns:[/\b(?:stomach|abdominal|belly|vomit|vomiting|diarrhea|constipation|nausea|food poisoning)\w*\b/i],
+    title:"This sounds more like a digestive concern than a typical DMD motor pattern",
+    summary:"The description is mainly about stomach, bowel, nausea, vomiting, or similar digestive symptoms. These do not by themselves match the progressive motor pattern DMD-AI is designed to assess.",
+    nextSteps:["Seek appropriate medical advice if the digestive symptoms are severe, persistent, associated with dehydration, or otherwise concerning.","If progressive weakness or loss of motor abilities is also present, enter that as a separate concern."],
+  },
+  {
+    category:"dental",
+    patterns:[/\b(?:tooth|teeth|gum|dental|toothache)\w*\b/i],
+    title:"This sounds more like a dental concern than a typical DMD motor pattern",
+    summary:"The description is focused on teeth or gums rather than progressive muscle weakness or motor difficulty.",
+    nextSteps:["A dentist or appropriate healthcare professional can assess persistent or severe dental pain, swelling, or infection concerns.","If there are separate progressive movement or muscle-strength concerns, describe those separately for DMD screening."],
+  },
+  {
+    category:"skin_or_allergy",
+    patterns:[/\b(?:rash|itch|itching|hives|skin|allergy|allergic|swelling)\w*\b/i],
+    title:"This sounds more like a skin or allergic concern than a typical DMD motor pattern",
+    summary:"The description is mainly about skin changes, itching, hives, allergy, or swelling. These symptoms alone do not match the typical progressive motor pattern considered in DMD screening.",
+    nextSteps:["Seek appropriate medical care if the reaction is persistent or worsening; urgent help is appropriate for breathing difficulty or rapidly worsening swelling.","Describe any separate progressive weakness or motor changes independently if those are also occurring."],
+  },
+  {
+    category:"urinary",
+    patterns:[/\b(?:urine|urinating|urination|pee|peeing|burning when|bladder|uti)\b/i],
+    title:"This sounds more like a urinary concern than a typical DMD motor pattern",
+    summary:"The description is centered on urinary symptoms rather than progressive muscle weakness or loss of motor abilities.",
+    nextSteps:["A healthcare professional can assess urinary pain, frequency, fever, blood in urine, or persistent symptoms.","If there are also progressive motor difficulties, describe them separately for DMD screening."],
+  },
+  {
+    category:"headache_or_nonmotor_neurologic",
+    patterns:[/\b(?:headache|migraine|dizzy|dizziness|vertigo)\w*\b/i],
+    title:"This does not strongly match the progressive motor pattern DMD-AI is designed to assess",
+    summary:"The description is focused on headache, dizziness, or a similar non-motor symptom rather than progressive proximal muscle weakness.",
+    nextSteps:["Seek appropriate medical advice if the symptom is severe, new, recurrent, or worsening.","If there are separate repeated falls, difficulty rising, stair-climbing difficulty, or progressive weakness, describe those separately."],
+  },
+];
+
+function detectAlternativeContext(text:string):AlternativeContext | null {
+  for(const item of NON_DMD_CONTEXTS){
+    if(item.patterns.some((pattern)=>pattern.test(text))){
+      return {category:item.category,title:item.title,summary:item.summary,nextSteps:item.nextSteps};
+    }
+  }
+  return null;
+}
+
 function isNegated(text:string, matchIndex:number){
   const before=text.slice(Math.max(0,matchIndex-45),matchIndex).toLowerCase();
   return /\b(?:no|not|never|doesn't|does not|isn't|is not|without|denies|didn't|did not)\b[^.!?]{0,30}$/.test(before);
@@ -122,13 +185,28 @@ function ageWeight(age:string){
 
 export function detectAssessmentRoute(text:string){
   const features=detectNarrative(text);
+  const urgentReasons=EMERGENCY_PATTERNS.filter(x=>x.regex.test(text)).map(x=>x.label);
   const hasAcute=ACUTE_CONTEXT_PATTERNS.filter(p=>p.test(text)).length>=2 || features.some(f=>f.key==="acute_injury"||f.key==="pain_only");
   const hasChronic=CHRONIC_CONTEXT_PATTERNS.some(p=>p.test(text));
-  const strongDmdFeature=features.some(f=>["gowers","stairs","standing","toe_walking","calf","motor_delay","loss","weakness"].includes(f.key) && f.weight>0);
-  return {
-    route: hasAcute && !hasChronic && !strongDmdFeature ? "acute-context" as const : "dmd-context" as const,
-    features,
+  const highSpecificity=features.some(f=>["gowers","toe_walking","calf","motor_delay","loss"].includes(f.key) && f.weight>0);
+  const classicMotorCount=["falls","stairs","standing","run_jump","weakness"].filter(k=>features.some(f=>f.key===k && f.weight>0)).length;
+  const meaningfulDmdPattern=highSpecificity || classicMotorCount>=2 || (hasChronic && classicMotorCount>=1);
+  const alternative=detectAlternativeContext(text);
+
+  let route:AssessmentRoute;
+  if(urgentReasons.length) route="urgent-context";
+  else if(hasAcute && !hasChronic && !meaningfulDmdPattern) route="acute-context";
+  else if(!meaningfulDmdPattern) route="non-dmd-context";
+  else route="dmd-context";
+
+  const fallbackAlternative:AlternativeContext={
+    category:"other_non_dmd",
+    title:"This description does not strongly match a typical progressive DMD motor pattern",
+    summary:"DMD-AI did not find enough DMD-relevant motor features in this description to start the Duchenne screening questions. This does not identify the cause of the symptom and does not rule out another medical condition.",
+    nextSteps:["Use an appropriate healthcare professional for symptoms that are persistent, severe, recurrent, or worsening.","If you are also noticing repeated unexplained falls, difficulty climbing stairs, trouble rising from the floor, progressive muscle weakness, delayed motor development, toe walking, large calves, or loss of abilities, describe those motor changes separately."],
   };
+
+  return {route,features,urgentReasons,alternative:alternative ?? fallbackAlternative};
 }
 
 export function analyzeDmdAssessment(input:DmdAssessmentInput):DmdAssessmentResult{
